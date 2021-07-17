@@ -47,16 +47,7 @@
                     @foreach (var folder in Folders)
                     {
                         <div class="col col-6 mb-3">
-                            @if (folder.Length > 33)
-                            {
-                                <Tooltip Text="@folder">
-                                    <Folder FolderPath="@folder" />
-                                </Tooltip>
-                            }
-                            else
-                            {
-                                <Folder FolderPath="@folder"/>
-                            }                            
+                            <Folder FolderPath="@folder" />                          
                         </div>
                     }
                 </div>
@@ -79,9 +70,7 @@
                 <tbody>
                     @foreach (var file in Files)
                     {
-                        <tr class="is-clickable" @onclick="(() => OpenFile(file))">
-                            <td>@file</td>
-                        </tr>
+                        <File FileName="@file" />
                     }
                 </tbody>
             </table>

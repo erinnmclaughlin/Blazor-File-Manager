@@ -8,7 +8,7 @@ namespace BlazorHybridDemo.WebUI.Shared.Windows
 
         [Parameter] public string FolderPath { get; set; }
 
-        private string FolderPathText => FolderPath.Length > 33 ? $"{FolderPath.Substring(0, 30)}..." : FolderPath;
+        private string FolderPathText => FolderPath.Substring(FolderPath.LastIndexOf("\\") + 1);
 
         private void HandleClick()
         {

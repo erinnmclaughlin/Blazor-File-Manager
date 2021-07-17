@@ -45,11 +45,6 @@ namespace BlazorHybridDemo.WebUI.Shared.Windows
             StateHasChanged();
         }
 
-        public void OpenFile(string file)
-        {
-            System.Diagnostics.Process.Start("cmd.exe", $"/c {file}");
-        }
-
         public void OpenCommandPrompt()
         {
             new System.Diagnostics.Process()
