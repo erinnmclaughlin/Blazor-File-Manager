@@ -13,8 +13,8 @@ namespace BlazorHybridDemo.WebUI.Shared.Windows
         public string ThemeColor { get; set; }
         public string ThemeColorLight { get; set; }
 
-        List<string> Folders { get; set; }
-        List<string> Files { get; set; }
+        private List<string> Folders { get; set; }
+        private List<string> Files { get; set; }
 
         private string _directory = "C:\\";
         public string Directory
@@ -38,7 +38,19 @@ namespace BlazorHybridDemo.WebUI.Shared.Windows
             base.OnAfterRender(firstRender);
         }
 
-        public void LoadDirectory()
+        private void GoTo(string path)
+        {
+            if (!IsDirectory(path))
+                Directory = Directory.Substring(0, Directory.LastIndexOf(path) + path.Length + 1);
+        }
+
+        private bool IsDirectory(string path)
+        {
+            var result = path == Directory || path + '\\' == Directory;
+            return result;
+        }
+
+        private void LoadDirectory()
         {
             Folders = System.IO.Directory.GetDirectories(_directory).Where(x => !new DirectoryInfo(x).Attributes.HasFlag(FileAttributes.Hidden)).ToList();
             Files = System.IO.Directory.GetFiles(_directory).ToList();
@@ -59,16 +71,16 @@ namespace BlazorHybridDemo.WebUI.Shared.Windows
             }.Start();
         }
 
-        public void OpenFileExplorer()
+        private void OpenFileExplorer()
         {
             System.Diagnostics.Process.Start("explorer.exe", Directory);
         }
 
-        public void SetTheme()
+        private void SetTheme()
         {
             var themeColor = SystemThemeHelper.GetThemeColor();
             ThemeColor = themeColor.ToHex();
             ThemeColorLight = themeColor.AddLuminosity(0.5f).ToHex();
-        }
+        }        
     }
 }

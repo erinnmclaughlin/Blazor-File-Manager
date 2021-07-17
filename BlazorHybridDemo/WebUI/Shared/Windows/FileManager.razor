@@ -5,16 +5,15 @@
     <div class="col">
         <nav>
             <ol class="breadcrumb">
-                @foreach (var path in Directory.Split('\\'))
-                {
-                    @if (Directory.EndsWith(path))
+                @{
+                    var paths = Directory.Split('\\');
+                    for (int i = 0; i < paths.Count(); i++)
                     {
-                        <li class="breadcrumb-item active">@path</li>
-                    }
-                    else
-                    {
+                        var local_i = i;
+                        var fullPath = string.Join("\\", paths.Take(local_i + 1));
+
                         <li class="breadcrumb-item">
-                            <a href="#" style="color: @ThemeColor" @onclick="(() => Directory = Directory.Substring(0, Directory.LastIndexOf(path) + path.Length + 1))">@path</a>
+                            <a href="#" style="color: @ThemeColor" @onclick="(() => GoTo(fullPath))">@paths[local_i]</a>
                         </li>
                     }
                 }
