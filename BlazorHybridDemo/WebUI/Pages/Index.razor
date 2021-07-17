@@ -1,0 +1,7 @@
+﻿@page "/"
+@using System.Runtime.InteropServices
+
+@if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+{
+    <BlazorHybridDemo.WebUI.Shared.Windows.FileManager />
+}

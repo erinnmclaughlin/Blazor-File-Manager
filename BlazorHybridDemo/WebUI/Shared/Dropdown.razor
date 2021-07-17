@@ -1,0 +1,8 @@
+﻿<div class="dropdown" @onmouseover="(() => _showMenu = true)" @onmouseout="(() => _showMenu = false)">
+  <button class="btn btn-secondary dropdown-toggle" type="button">
+    @Text
+  </button>
+  <ul class="dropdown-menu @(_showMenu ? "show" : "")" aria-labelledby="dropdownMenuButton1">
+    @ChildContent
+  </ul>
+</div>
